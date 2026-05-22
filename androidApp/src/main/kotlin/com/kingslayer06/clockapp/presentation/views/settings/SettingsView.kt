@@ -27,18 +27,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kingslayer06.clockapp.core.ui.ColorAccentGreen
 import com.kingslayer06.clockapp.core.ui.ColorBackground
-import com.kingslayer06.clockapp.core.ui.ColorBorder
 import com.kingslayer06.clockapp.core.ui.ColorTextPrimary
 import com.kingslayer06.clockapp.domain.models.ChessRuleset
 import com.kingslayer06.clockapp.domain.models.SettingsUiState
 import com.kingslayer06.clockapp.presentation.viewModels.SettingsViewModel
 import com.kingslayer06.clockapp.presentation.views.settings.components.CustomRulesetGrid
-import com.kingslayer06.clockapp.presentation.views.settings.components.CustomTimeStepper
 import com.kingslayer06.clockapp.presentation.views.settings.components.RulesetGrid
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun SettingsScreen(
+    onStart: (ChessRuleset) -> Unit,
     viewModel: SettingsViewModel = koinViewModel()
 ) {
     val state by viewModel.uiState.collectAsState()
@@ -50,9 +49,7 @@ fun SettingsScreen(
         onIncrementMinutes = { viewModel.incrementMinutes() },
         onDecrementIncrement = { viewModel.decrementIncrement() },
         onIncrementIncrement = { viewModel.incrementIncrement() },
-        onStartGame = {
-
-        }
+        onStartGame = { onStart(state.selectedRuleset) }
     )
 }
 

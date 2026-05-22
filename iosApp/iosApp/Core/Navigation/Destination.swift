@@ -6,7 +6,9 @@
 //
 
 import Foundation
+import SharedLogic
 
 public enum Destination: Hashable {
-    
+    case settings
+    case clock(ruleset: ChessRuleset)
 }

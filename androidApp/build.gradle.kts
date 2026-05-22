@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kotlinSerialization)
 }
 
 kotlin {
@@ -16,12 +17,15 @@ dependencies {
     implementation(projects.sharedUI)
 
     implementation(libs.androidx.activity.compose)
-    implementation(libs.compose.foundation)
-
-    implementation(libs.compose.uiToolingPreview)
+    implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.material3)
+
+    implementation(libs.compose.foundation)
+    implementation(libs.compose.uiToolingPreview)
     implementation(libs.compose.material.icons.extended)
     debugImplementation(libs.compose.uiTooling)
+
+    implementation(libs.kotlinx.serialization.json)
 
     implementation(libs.koin.compose.viewmodel)
 }

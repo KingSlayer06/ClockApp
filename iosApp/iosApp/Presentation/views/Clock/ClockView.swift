@@ -6,13 +6,54 @@
 //
 
 import SwiftUI
+import SharedLogic
 
 struct ClockView: View {
+    let ruleset: ChessRuleset
+    let onBack: () -> Void
+    
+    @StateObject private var viewModel = ClockViewModelWrapper()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Group {
+            ClockViewContent(
+                state: viewModel.uiState,
+                onPlayerOneTap: { },
+                onPlayerTwoTap: { },
+                onStart: { },
+                onPause: { },
+                onResume: { },
+                onReset: { },
+                onBack: onBack
+            )
+        }
     }
 }
 
-#Preview {
-    ClockView()
+private struct ClockViewContent: View {
+    let state: ClockUiState
+    let onPlayerOneTap: () -> Void
+    let onPlayerTwoTap: () -> Void
+    let onStart: () -> Void
+    let onPause: () -> Void
+    let onResume: () -> Void
+    let onReset: () -> Void
+    let onBack: () -> Void
+    
+    var body: some View {
+        
+    }
 }
+
+//#Preview {
+//    ClockViewContent(
+//        state: ClockUiState(),
+//        onPlayerOneTap: {},
+//        onPlayerTwoTap: {},
+//        onStart: {},
+//        onPause: {},
+//        onResume: {},
+//        onReset: {},
+//        onBack: {}
+//    )
+//}

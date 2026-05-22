@@ -30,6 +30,12 @@ struct RootView: View {
 extension Destination {
     @ViewBuilder
     func setPath(_ navHostController: NavHostController) -> some View {
-        
+        switch self {
+            case .settings: SettingsView()
+                
+            case .clock(let ruleset): ClockView(ruleset: ruleset) {
+                navHostController.popBackStack()
+            }
+        }
     }
 }

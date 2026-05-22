@@ -1,12 +1,5 @@
 package com.kingslayer06.clockapp.di
 
-import com.kingslayer06.clockapp.data.repository.GameRepository
-import com.kingslayer06.clockapp.domain.repository.IGameRepository
-import com.kingslayer06.clockapp.domain.useCases.PauseGameUseCase
-import com.kingslayer06.clockapp.domain.useCases.ResetGameUseCase
-import com.kingslayer06.clockapp.domain.useCases.ResumeGameUseCase
-import com.kingslayer06.clockapp.domain.useCases.StartGameUseCase
-import com.kingslayer06.clockapp.domain.useCases.SwitchPlayerTurnUseCase
 import com.kingslayer06.clockapp.presentation.viewModels.ClockViewModel
 import com.kingslayer06.clockapp.presentation.viewModels.SettingsViewModel
 import org.koin.core.component.KoinComponent
@@ -21,25 +14,8 @@ fun initKoin() {
 }
 
 val appModule = module {
-    single<IGameRepository> { GameRepository() }
-
-    single { StartGameUseCase(get()) }
-    single { PauseGameUseCase(get()) }
-    single { ResumeGameUseCase(get()) }
-    single { SwitchPlayerTurnUseCase(get()) }
-    single { ResetGameUseCase(get()) }
-
     factory { SettingsViewModel() }
-
-    factory {
-        ClockViewModel(
-            get(),
-            get(),
-            get(),
-            get(),
-            get()
-        )
-    }
+    factory { ClockViewModel() }
 }
 
 class ViewModelProvider: KoinComponent {
