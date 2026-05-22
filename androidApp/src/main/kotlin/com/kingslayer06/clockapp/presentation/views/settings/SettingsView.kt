@@ -1,5 +1,7 @@
 package com.kingslayer06.clockapp.presentation.views.settings
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,10 +27,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kingslayer06.clockapp.core.ui.ColorAccentGreen
 import com.kingslayer06.clockapp.core.ui.ColorBackground
+import com.kingslayer06.clockapp.core.ui.ColorBorder
 import com.kingslayer06.clockapp.core.ui.ColorTextPrimary
 import com.kingslayer06.clockapp.domain.models.ChessRuleset
 import com.kingslayer06.clockapp.domain.models.SettingsUiState
 import com.kingslayer06.clockapp.presentation.viewModels.SettingsViewModel
+import com.kingslayer06.clockapp.presentation.views.settings.components.CustomRulesetGrid
 import com.kingslayer06.clockapp.presentation.views.settings.components.CustomTimeStepper
 import com.kingslayer06.clockapp.presentation.views.settings.components.RulesetGrid
 import org.koin.compose.viewmodel.koinViewModel
@@ -84,26 +88,19 @@ private fun SettingsScreenContent(
 
             // Custom time
             SectionLabel("Custom time")
-            CustomTimeStepper(
-                label = "Minutes per player",
-                value = state.selectedRuleset.minutes,
-                range = 1..60,
-                onDecrement = onDecrementMinutes,
-                onIncrement = onIncrementMinutes
-            )
-            CustomTimeStepper(
-                label = "Increment (seconds)",
-                value = state.selectedRuleset.increment,
-                range = 0..60,
-                onDecrement = onDecrementIncrement,
-                onIncrement = onIncrementIncrement
+            CustomRulesetGrid(
+                state = state,
+                onDecrementMinutes = onDecrementMinutes,
+                onIncrementMinutes = onIncrementMinutes,
+                onDecrementIncrement = onDecrementIncrement,
+                onIncrementIncrement = onIncrementIncrement
             )
 
             Spacer(modifier = Modifier.weight(1f))
 
             // Start button
             Button(
-                onClick  = onStartGame,
+                onClick = onStartGame,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(48.dp),

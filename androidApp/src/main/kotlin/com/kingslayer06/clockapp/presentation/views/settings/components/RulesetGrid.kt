@@ -37,8 +37,8 @@ fun RulesetGrid(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         listOf(
-            Triple(ChessRuleset.Blitz,  "${ChessRuleset.Blitz.name} chess",  "${ChessRuleset.Blitz.minutes}m"),
-            Triple(ChessRuleset.Quick,  "${ChessRuleset.Quick.name} chess",  "${ChessRuleset.Quick.minutes}m"),
+            Triple(ChessRuleset.Blitz, "${ChessRuleset.Blitz.name} chess", "${ChessRuleset.Blitz.minutes}m"),
+            Triple(ChessRuleset.Quick, "${ChessRuleset.Quick.name} chess", "${ChessRuleset.Quick.minutes}m"),
             Triple(ChessRuleset.Action, "${ChessRuleset.Action.name} chess", "${ChessRuleset.Action.minutes}m"),
         ).forEach { (ruleset, label, time) ->
             PresetCard(
@@ -68,6 +68,10 @@ private fun PresetCard(
         targetValue = if (isSelected) Color(0xFF0D1F0D) else ColorSurface,
         label = "presetBg"
     )
+    val textColor by animateColorAsState(
+        targetValue = if (isSelected) ColorAccentGreen else ColorTextPrimary,
+        label = "presetTextColor"
+    )
 
     Surface(
         modifier = modifier
@@ -90,7 +94,7 @@ private fun PresetCard(
             )
             Text(
                 text = time,
-                color = if (isSelected) ColorAccentGreen else ColorTextPrimary,
+                color = textColor,
                 fontSize = 22.sp,
                 fontWeight = FontWeight.Light,
                 letterSpacing = (-0.5).sp
