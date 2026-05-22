@@ -16,9 +16,14 @@ dependencies {
     implementation(projects.sharedUI)
 
     implementation(libs.androidx.activity.compose)
+    implementation(libs.compose.foundation)
 
     implementation(libs.compose.uiToolingPreview)
+    implementation(libs.androidx.material3)
+    implementation(libs.compose.material.icons.extended)
     debugImplementation(libs.compose.uiTooling)
+
+    implementation(libs.koin.compose.viewmodel)
 }
 
 android {

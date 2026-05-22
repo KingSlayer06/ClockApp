@@ -41,17 +41,17 @@ class ClockViewModel(
 
     fun selectRuleset(ruleset: ChessRuleset) {
         stopTicker()
-        _uiState.value = resetGameUseCase.execute(ruleset)
+        _uiState.update { resetGameUseCase.execute(ruleset) }
     }
 
     fun startGame() {
-        val currentState = _uiState.value
-        _uiState.value = startGameUseCase.execute(currentState)
+        _uiState.update { currentState ->
+            startGameUseCase.execute(currentState)
+        }
         startTicker()
     }
 
     fun pauseGame() {
-        val currentState = _uiState.value
         stopTicker()
         _uiState.update { currentState ->
             pauseGameUseCase.execute(currentState)
@@ -59,7 +59,6 @@ class ClockViewModel(
     }
 
     fun resumeGame() {
-        val currentState = _uiState.value
         _uiState.update { currentState ->
             resumeGameUseCase.execute(currentState)
         }
@@ -97,7 +96,7 @@ class ClockViewModel(
                             p1Time = (p1Time - 100).coerceAtLeast(0)
 
                             // Player one won
-                            if (p1Time == 0L) {
+                            if (p1Time == 0) {
                                 winner = ActivePlayer.PLAYER_TWO
                                 gameState = GameState.FINISHED
                             }
@@ -106,7 +105,7 @@ class ClockViewModel(
                             p2Time = (p2Time - 100).coerceAtLeast(0)
 
                             // Player two won
-                            if (p2Time == 0L) {
+                            if (p2Time == 0) {
                                 winner = ActivePlayer.PLAYER_ONE
                                 gameState = GameState.FINISHED
                             }

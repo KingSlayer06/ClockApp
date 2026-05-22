@@ -34,8 +34,8 @@ class GameRepository: IGameRepository {
 
     override fun resetGame(ruleset: ChessRuleset): ClockUiState {
         return ClockUiState(
-            playerOneTimeLeft = ruleset.initialTimeMillis,
-            playerTwoTimeLeft = ruleset.initialTimeMillis,
+            playerOneTimeLeft = ruleset.minutes,
+            playerTwoTimeLeft = ruleset.increment,
             activePlayer = ActivePlayer.NONE,
             gameState = GameState.IDLE,
             currentRuleset = ruleset,
@@ -54,7 +54,7 @@ class GameRepository: IGameRepository {
 
         var p1Time = currentState.playerOneTimeLeft
         var p2Time = currentState.playerTwoTimeLeft
-        val increment = currentState.currentRuleset.incrementMillis
+        val increment = currentState.currentRuleset.increment
 
         val nextPlayer = if (from == ActivePlayer.PLAYER_ONE) {
             p1Time += increment
