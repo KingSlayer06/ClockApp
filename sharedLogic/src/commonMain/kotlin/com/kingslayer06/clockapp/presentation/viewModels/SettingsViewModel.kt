@@ -58,9 +58,4 @@ class SettingsViewModel(): ViewModel() {
             selectedRuleset = ChessRuleset.Custom(minutes, increment),
         ) }
     }
-
-    fun getSelectedRuleset(): ChessRuleset {
-        val state = _uiState.value
-        return state.selectedRuleset
-    }
 }
