@@ -1,6 +1,6 @@
 package com.kingslayer06.clockapp.domain.models
 
-enum class Player { ONE, TWO, NONE }
+enum class Player { ONE, TWO }
 enum class GamePhase { IDLE, RUNNING, PAUSED, FINISHED }
 enum class ClockTimeState { NORMAL, WARNING, DANGER, EXPIRED }
 

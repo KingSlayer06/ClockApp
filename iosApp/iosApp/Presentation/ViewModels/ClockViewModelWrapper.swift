@@ -37,23 +37,23 @@ final class ClockViewModelWrapper: ObservableObject {
         viewModel.selectRuleset(ruleset: ruleset)
     }
 
-    func startGame() {
-        viewModel.startGame()
+    func startClock() {
+        viewModel.startClock()
     }
 
-    func pauseGame() {
-        viewModel.pauseGame()
+    func pauseClock() {
+        viewModel.pauseClock()
     }
 
-    func resumeGame() {
-        viewModel.resumeGame()
+    func resumeClock() {
+        viewModel.resumeClock()
     }
 
-    func resetGame(ruleset: ChessRuleset) {
-        viewModel.resetGame(ruleset: ruleset)
+    func resetClock(ruleset: ChessRuleset) {
+        viewModel.resetClock(ruleset: ruleset)
     }
 
-    func handlePlayerTap(player: ActivePlayer) {
+    func handlePlayerTap(player: Player) {
         viewModel.handlePlayerTap(player: player)
     }
 }

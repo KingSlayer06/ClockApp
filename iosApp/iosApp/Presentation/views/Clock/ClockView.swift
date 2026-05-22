@@ -18,12 +18,12 @@ struct ClockView: View {
         Group {
             ClockViewContent(
                 state: viewModel.uiState,
-                onPlayerOneTap: { },
-                onPlayerTwoTap: { },
-                onStart: { },
-                onPause: { },
-                onResume: { },
-                onReset: { },
+                onPlayerOneTap: { viewModel.handlePlayerTap(player: .one) },
+                onPlayerTwoTap: { viewModel.handlePlayerTap(player: .two) },
+                onStart: { viewModel.startClock() },
+                onPause: { viewModel.pauseClock() },
+                onResume: { viewModel.resumeClock() },
+                onReset: { viewModel.resetClock(ruleset: ruleset) },
                 onBack: onBack
             )
         }
@@ -45,15 +45,28 @@ private struct ClockViewContent: View {
     }
 }
 
-//#Preview {
-//    ClockViewContent(
-//        state: ClockUiState(),
-//        onPlayerOneTap: {},
-//        onPlayerTwoTap: {},
-//        onStart: {},
-//        onPause: {},
-//        onResume: {},
-//        onReset: {},
-//        onBack: {}
-//    )
-//}
+#Preview {
+    let dummyState = ClockUiState(
+        phase: .running,
+        activePlayer: .one,
+        playerOneTimeMs: 15,
+        playerTwoTimeMs: 15,
+        playerOneMoves: 10,
+        playerTwoMoves: 10,
+        ruleset: .Blitz(),
+        winner: nil,
+        playerOneTimeState: .normal,
+        playerTwoTimeState: .normal
+    )
+    
+    ClockViewContent(
+        state: dummyState,
+        onPlayerOneTap: {},
+        onPlayerTwoTap: {},
+        onStart: {},
+        onPause: {},
+        onResume: {},
+        onReset: {},
+        onBack: {}
+    )
+}
