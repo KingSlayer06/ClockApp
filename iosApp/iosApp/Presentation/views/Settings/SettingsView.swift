@@ -47,19 +47,12 @@ private struct SettingsViewContent: View {
             
             // Custom time
             SectionLabel(text: "Custom time")
-            CustomTimeStepper(
-                label: "Minutes per player",
-                value: state.selectedRuleset.minutes,
-                range: 1...60,
-                onDecrement: onDecrementMinutes,
-                onIncrement: onIncrementMinutes
-            )
-            CustomTimeStepper(
-                label: "Increment (seconds)",
-                value: state.selectedRuleset.increment,
-                range: 0...60,
-                onDecrement: onDecrementIncrement,
-                onIncrement: onIncrementIncrement
+            CustomRulesetGrid(
+                state: state,
+                onDecrementMinutes: onDecrementMinutes,
+                onIncrementMinutes: onIncrementMinutes,
+                onDecrementIncrement: onDecrementIncrement,
+                onIncrementIncrement: onIncrementIncrement
             )
             
             Spacer(minLength: 0)

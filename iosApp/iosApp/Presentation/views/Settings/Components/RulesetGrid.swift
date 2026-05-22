@@ -46,14 +46,20 @@ private struct PresetCard: View {
     let onSelect: () -> Void
     
     var borderColor: Color {
-        withAnimation(.easeInOut(duration: 0.15)) {
+        withAnimation {
             isSelected ? Color.colorAccentGreen : Color.colorBorder
         }
     }
     
     var bgColor: Color {
-        withAnimation(.easeInOut(duration: 0.15)) {
+        withAnimation {
             isSelected ? Color(hex: "#0D1F0D") : Color.colorSurface
+        }
+    }
+    
+    var textColor: Color {
+        withAnimation {
+            isSelected ? Color.colorAccentGreen : Color.colorTextPrimary
         }
     }
     
@@ -66,7 +72,7 @@ private struct PresetCard: View {
             
             Text(time)
                 .font(.system(size: 22, weight: .light))
-                .foregroundColor(isSelected ? Color.colorAccentGreen : Color.colorTextPrimary)
+                .foregroundColor(textColor)
         }
         .frame(maxWidth: .infinity)
         .padding(10)
@@ -74,7 +80,7 @@ private struct PresetCard: View {
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .overlay(
             RoundedRectangle(cornerRadius: 10)
-                .stroke(borderColor, lineWidth: 0.5)
+                .stroke(borderColor, lineWidth: 1)
         )
         .onTapGesture { onSelect() }
     }
