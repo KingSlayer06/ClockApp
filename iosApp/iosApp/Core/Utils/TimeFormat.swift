@@ -4,7 +4,7 @@
 
 import Foundation
 
-private func formatTime(ms: Int64) -> String {
+func formatTime(ms: Int64) -> String {
     let totalSeconds = max(0, ms / 1000)
     let minutes = totalSeconds / 60
     let seconds = totalSeconds % 60

@@ -19,10 +19,12 @@ struct RootView: View {
     
     var body: some View {
         NavigationStack(path: $navHostController.path) {
-            SettingsView()
-                .navigationDestination(for: Destination.self) { route in
-                    route.setPath(navHostController)
-                }
+            SettingsView { selectedRuleset in
+                navHostController.navigate(route: .clock(ruleset: selectedRuleset))
+            }
+            .navigationDestination(for: Destination.self) { route in
+                route.setPath(navHostController)
+            }
         }
     }
 }
@@ -31,7 +33,9 @@ extension Destination {
     @ViewBuilder
     func setPath(_ navHostController: NavHostController) -> some View {
         switch self {
-            case .settings: SettingsView()
+            case .settings: SettingsView { selectedRuleset in
+                navHostController.navigate(route: .clock(ruleset: selectedRuleset))
+            }
                 
             case .clock(let ruleset): ClockView(ruleset: ruleset) {
                 navHostController.popBackStack()

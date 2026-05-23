@@ -47,19 +47,19 @@ private struct PresetCard: View {
     
     var borderColor: Color {
         withAnimation {
-            isSelected ? Color.colorAccentGreen : Color.colorBorder
+            isSelected ? Color.accentGreen : Color.border
         }
     }
     
     var bgColor: Color {
         withAnimation {
-            isSelected ? Color(hex: "#0D1F0D") : Color.colorSurface
+            isSelected ? Color(hex: "#0D1F0D") : Color.surface
         }
     }
     
     var textColor: Color {
         withAnimation {
-            isSelected ? Color.colorAccentGreen : Color.colorTextPrimary
+            isSelected ? Color.accentGreen : Color.textPrimary
         }
     }
     
@@ -67,7 +67,7 @@ private struct PresetCard: View {
         VStack(spacing: 4) {
             Text(type.uppercased())
                 .font(.system(size: 9))
-                .foregroundColor(Color.colorTextSecondary)
+                .foregroundColor(Color.textSecondary)
                 .tracking(1.0)
             
             Text(time)

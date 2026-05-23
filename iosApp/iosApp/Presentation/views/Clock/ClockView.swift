@@ -40,8 +40,39 @@ private struct ClockViewContent: View {
     let onReset: () -> Void
     let onBack: () -> Void
     
+    @Environment(\.horizontalSizeClass) private var hSize
+    
     var body: some View {
-        
+        GeometryReader { geometry in
+            let isLandscape = geometry.size.width > geometry.size.height
+            
+            if isLandscape {
+                LandscapeClockLayout(
+                    state: state,
+                    onPlayerOneTap: onPlayerOneTap,
+                    onPlayerTwoTap: onPlayerTwoTap,
+                    onStart: onStart,
+                    onPause: onPause,
+                    onResume: onResume,
+                    onReset: onReset,
+                    onBack: onBack
+                )
+            } else {
+                PortraitClockLayout(
+                    state: state,
+                    onPlayerOneTap: onPlayerOneTap,
+                    onPlayerTwoTap: onPlayerTwoTap,
+                    onStart: onStart,
+                    onPause: onPause,
+                    onResume: onResume,
+                    onReset: onReset,
+                    onBack: onBack
+                )
+            }
+        }
+        .background(Color.background.ignoresSafeArea())
+        .navigationBarHidden(true)
+        .ignoresSafeArea()
     }
 }
 

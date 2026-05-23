@@ -21,7 +21,7 @@ struct CustomRulesetGrid: View {
     
     var customBorderColor: Color {
         withAnimation {
-            isCustomSelected ? Color.colorAccentGreen : Color.colorBorder
+            isCustomSelected ? Color.accentGreen : Color.border
         }
     }
     
@@ -64,13 +64,13 @@ private struct CustomTimeStepper: View {
     
     var bgColor: Color {
         withAnimation {
-            isSelected ? Color(hex: "#0D1F0D") : Color.colorSurface
+            isSelected ? Color(hex: "#0D1F0D") : Color.surface
         }
     }
     
     var textColor: Color {
         withAnimation {
-            isSelected ? Color.colorAccentGreen : Color.colorTextPrimary
+            isSelected ? Color.accentGreen : Color.textPrimary
         }
     }
     
@@ -78,7 +78,7 @@ private struct CustomTimeStepper: View {
         HStack {
             Text(label)
                 .font(.system(size: 12))
-                .foregroundColor(Color.colorTextPrimary)
+                .foregroundColor(Color.textPrimary)
             
             Spacer()
             
@@ -110,7 +110,7 @@ private struct StepButton: View {
         Button(action: action) {
             Text(label)
                 .font(.system(size: 14))
-                .foregroundColor(Color.colorTextSecondary)
+                .foregroundColor(Color.textSecondary)
                 .frame(width: 26, height: 26)
                 .background(Color(hex: "#222222"))
                 .clipShape(RoundedRectangle(cornerRadius: 5))

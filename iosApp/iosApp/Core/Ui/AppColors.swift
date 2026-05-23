@@ -9,20 +9,20 @@ import Foundation
 import SwiftUI
 
 public extension Color {
-    static let colorBackground   = Color(hex: "#0D0D0D")
-    static let colorSurface      = Color(hex: "#161616")
-    static let colorBorder       = Color(hex: "#2A2A2A")
-    static let colorInactive     = Color(hex: "#111111")
-    static let colorActiveTint   = Color(hex: "#1A1A2E")
+    static let background = Color(hex: "#0D0D0D")
+    static let surface = Color(hex: "#161616")
+    static let border = Color(hex: "#2A2A2A")
+    static let inactive = Color(hex: "#111111")
+    static let activeTint = Color(hex: "#1A1A2E")
     
-    static let colorTextPrimary   = Color(hex: "#FF0F0F0")
-    static let colorTextSecondary = Color(hex: "#F888888")
-    static let colorTextHint      = Color(hex: "#F555555")
+    static let textPrimary = Color(hex: "#FF0F0F0")
+    static let textSecondary = Color(hex: "#F888888")
+    static let textHint = Color(hex: "#F555555")
     
-    static let colorAccentGreen  = Color(hex: "#4ADE80")
-    static let colorWarning      = Color(hex: "#EF9F27")
-    static let colorDanger       = Color(hex: "#E24B4A")
-    static let colorActive       = Color(hex: "#4ADE80")
+    static let accentGreen = Color(hex: "#4ADE80")
+    static let warning = Color(hex: "#EF9F27")
+    static let danger = Color(hex: "#E24B4A")
+    static let active = Color(hex: "#4ADE80")
 }
 
 public extension Color {

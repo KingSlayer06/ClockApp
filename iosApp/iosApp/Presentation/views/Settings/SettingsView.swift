@@ -11,6 +11,8 @@ import SharedLogic
 struct SettingsView: View {
     @StateObject private var viewModel = SettingsViewModelWrapper()
     
+    let onStart: (ChessRuleset) -> Void
+    
     var body: some View {
         SettingsViewContent(
             state: viewModel.uiState,
@@ -19,7 +21,7 @@ struct SettingsView: View {
             onIncrementMinutes: { viewModel.incrementMinutes() },
             onDecrementIncrement: { viewModel.decrementIncrement() },
             onIncrementIncrement: { viewModel.incrementIncrement() },
-            onStartGame: { }
+            onStartGame: { onStart(viewModel.uiState.selectedRuleset) }
         )
     }
 }
@@ -59,20 +61,20 @@ private struct SettingsViewContent: View {
             
             // Start button
             Button {
-                
+                onStartGame()
             } label: {
                 Text("Start game")
                     .font(.system(size: 14, weight: .semibold))
                     .foregroundColor(Color(hex: "0A1F0A"))
                     .frame(maxWidth: .infinity)
                     .frame(height: 48)
-                    .background(Color.colorAccentGreen)
+                    .background(Color.accentGreen)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
             }
         }
         .padding(.horizontal, 24)
         .padding(.vertical, 20)
-        .background(Color.colorBackground.ignoresSafeArea())
+        .background(Color.background.ignoresSafeArea())
         .navigationBarHidden(true)
     }
 }
@@ -83,7 +85,7 @@ private struct SettingsHeader: View {
             Spacer()
             Text("Clock Settings")
                 .font(.system(size: 15, weight: .medium))
-                .foregroundColor(Color.colorTextPrimary)
+                .foregroundColor(Color.textPrimary)
             Spacer()
         }
     }
@@ -96,7 +98,7 @@ private struct SectionLabel: View {
         Text(text.uppercased())
             .font(.system(size: 11))
             .fontWeight(Font.Weight.medium)
-            .foregroundColor(Color.colorTextPrimary)
+            .foregroundColor(Color.textPrimary)
             .tracking(1.0)
     }
 }
