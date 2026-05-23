@@ -64,7 +64,7 @@ private struct ControlButton: View {
                 .padding(.vertical, 5)
                 .overlay(
                     RoundedRectangle(cornerRadius: 6)
-                        .stroke(accent.opacity(0.5), lineWidth: 0.5)
+                        .stroke(accent, lineWidth: 1)
                 )
         }
     }
