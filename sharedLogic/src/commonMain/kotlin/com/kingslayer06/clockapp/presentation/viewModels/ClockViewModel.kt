@@ -121,7 +121,7 @@ class ClockViewModel(): ViewModel() {
                         Player.ONE -> {
                             p1Time = (p1Time - tickInterval).coerceAtLeast(0)
 
-                            // Player one won
+                            // Player two won
                             if (p1Time <= 0) {
                                 winner = Player.TWO
                                 phase = GamePhase.FINISHED
@@ -130,7 +130,7 @@ class ClockViewModel(): ViewModel() {
                         Player.TWO -> {
                             p2Time = (p2Time - 100).coerceAtLeast(0)
 
-                            // Player two won
+                            // Player one won
                             if (p2Time <= 0) {
                                 winner = Player.ONE
                                 phase = GamePhase.FINISHED

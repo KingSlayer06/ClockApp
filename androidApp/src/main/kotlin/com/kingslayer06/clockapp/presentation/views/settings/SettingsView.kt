@@ -70,7 +70,7 @@ private fun SettingsScreenContent(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 24.dp, vertical = 20.dp),
+                .padding(horizontal = 24.dp, vertical = 50.dp),
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
             // Header

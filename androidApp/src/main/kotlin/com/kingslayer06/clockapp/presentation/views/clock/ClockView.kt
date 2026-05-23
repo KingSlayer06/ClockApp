@@ -15,6 +15,7 @@ import com.kingslayer06.clockapp.domain.models.ClockUiState
 import com.kingslayer06.clockapp.domain.models.GamePhase
 import com.kingslayer06.clockapp.domain.models.Player
 import com.kingslayer06.clockapp.presentation.viewModels.ClockViewModel
+import com.kingslayer06.clockapp.presentation.views.clock.components.GameOverAlert
 import com.kingslayer06.clockapp.presentation.views.clock.components.LandscapeClockLayout
 import com.kingslayer06.clockapp.presentation.views.clock.components.PortraitClockLayout
 import org.koin.compose.viewmodel.koinViewModel
@@ -31,6 +32,13 @@ fun ClockView(
         if (state.phase == GamePhase.IDLE) {
             viewModel.selectRuleset(ruleset)
         }
+    }
+
+    if (state.phase == GamePhase.FINISHED) {
+        GameOverAlert(
+            winner = state.winner,
+            onDismiss = onBack
+        )
     }
 
     ClockViewContent(

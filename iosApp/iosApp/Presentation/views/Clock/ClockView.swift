@@ -15,7 +15,14 @@ struct ClockView: View {
     @StateObject private var viewModel = ClockViewModelWrapper()
     
     var body: some View {
-        Group {
+        ZStack {
+            if (viewModel.uiState.phase == .finished) {
+                GameOverAlert(
+                    winner: viewModel.uiState.winner,
+                    onDismiss: onBack
+                )
+            }
+            
             ClockViewContent(
                 state: viewModel.uiState,
                 onPlayerOneTap: { viewModel.handlePlayerTap(player: .one) },
@@ -26,6 +33,11 @@ struct ClockView: View {
                 onReset: { viewModel.resetClock(ruleset: ruleset) },
                 onBack: onBack
             )
+        }
+        .onAppear {
+            if viewModel.uiState.phase == .idle {
+                viewModel.selectRuleset(ruleset: ruleset)
+            }
         }
     }
 }
