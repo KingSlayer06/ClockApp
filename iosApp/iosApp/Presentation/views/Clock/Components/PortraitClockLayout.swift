@@ -34,11 +34,13 @@ struct PortraitClockLayout: View {
             // Controls
             VStack(spacing: 0) {
                 Divider()
-                    .frame(width: 1)
+                    .frame(height: 1)
                     .background(Color.border)
                 
                 HStack(spacing: 0) {
+                    Spacer()
                     RulesetBadge(ruleset: state.ruleset)
+                    Spacer()
                 }
                 .padding(.vertical, 4)
                 
@@ -52,7 +54,7 @@ struct PortraitClockLayout: View {
                 )
                 
                 Divider()
-                    .frame(width: 1)
+                    .frame(height: 1)
                     .background(Color.border)
             }
             .background(Color.surface)

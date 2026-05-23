@@ -41,29 +41,28 @@ struct PlayerPanel: View {
             Rectangle()
                 .fill(bgColor)
             
-            // Main content
             VStack(spacing: 10) {
+                // Player panel
                 Text(playerLabel.uppercased())
                     .font(.system(size: 11, weight: .medium))
                     .foregroundColor(Color.textSecondary)
                     .tracking(1.5)
                 
+                // Timer
                 TimerDisplay(timeMs: timeMs, isActive: isActive)
                 
+                // Move counter
+                Text("\(moveCount) moves".uppercased())
+                    .font(.system(size: 11, weight: .medium))
+                    .foregroundColor(Color.textSecondary)
+                    .tracking(1.5)
+                
                 if isActive {
-                    Text("tap to end turn")
-                        .font(.system(size: 10))
+                    Text("Tap to end your turn")
+                        .font(.system(size: 11))
                         .foregroundColor(Color.textHint)
-                        .tracking(0.8)
+                        .tracking(1.5)
                 }
-            }
-
-            VStack {
-                Spacer()
-                Text("\(moveCount) moves")
-                    .font(.system(size: 10))
-                    .foregroundColor(Color.textHint)
-                    .padding(.bottom, 52)
             }
         }
         .opacity((!isActive && !isFinished) ? 0.55 : 1.0)
@@ -75,6 +74,5 @@ struct PlayerPanel: View {
             generator.impactOccurred()
             onTap()
         }
-        .accessibilityLabel("\(playerLabel) clock: \(formatTime(ms: timeMs))")
     }
 }

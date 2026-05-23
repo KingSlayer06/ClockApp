@@ -41,11 +41,6 @@ struct ControlsBar: View {
         }
         .frame(height: 44)
         .background(Color.surface)
-        .overlay(alignment: .top) {
-            Rectangle()
-                .frame(height: 0.5)
-                .foregroundColor(Color.border)
-        }
     }
 }
 

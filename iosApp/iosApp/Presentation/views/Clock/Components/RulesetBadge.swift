@@ -13,10 +13,10 @@ struct RulesetBadge: View {
     
     private var content: (icon: String, label: String) {
         switch ruleset {
-            case .Action(): return ("⚡", "Action")
-            case .Quick(): return ("🕐", "Quick")
-            case .Blitz(): return ("⚡", "Blitz")
-            default: return ("⚙", "Custom")
+            case .Action(): return ("bolt.fill", "Action")
+            case .Quick(): return ("timer", "Quick")
+            case .Blitz(): return ("bolt.fill", "Blitz")
+            default: return ("clock.fill", "Custom")
         }
     }
     
@@ -26,7 +26,7 @@ struct RulesetBadge: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 15, height: 15)
-                .tint(Color.textSecondary)
+                .foregroundStyle(Color.textSecondary)
                 .padding(.vertical, 4)
                 .padding(.leading, 12)
             
@@ -38,7 +38,7 @@ struct RulesetBadge: View {
                 .padding(.trailing, 12)
         }
         .background(Color(hex: "#1E1E3A"))
+        .clipShape(RoundedRectangle(cornerRadius: 20))
         .padding(.top, 8)
-        .clipShape(Capsule())
     }
 }

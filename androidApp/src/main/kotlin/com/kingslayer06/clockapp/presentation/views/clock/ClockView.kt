@@ -92,8 +92,19 @@ private fun ClockViewContent(
 @Preview
 @Composable
 fun ClockViewPreview() {
+    val dummyState = ClockUiState(
+        phase = GamePhase.RUNNING,
+        activePlayer = Player.ONE,
+        playerOneTimeMs = 15,
+        playerTwoTimeMs = 15,
+        playerOneMoves = 10,
+        playerTwoMoves = 10,
+        ruleset = ChessRuleset.Blitz,
+        winner = null
+    )
+
     ClockViewContent(
-        state = ClockUiState(),
+        state = dummyState,
         onPlayerOneTap = {},
         onPlayerTwoTap = {},
         onStart = {},

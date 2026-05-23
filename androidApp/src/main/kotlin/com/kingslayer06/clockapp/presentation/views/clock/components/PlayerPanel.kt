@@ -20,8 +20,6 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -31,7 +29,6 @@ import com.kingslayer06.clockapp.core.ui.ColorInactive
 import com.kingslayer06.clockapp.core.ui.ColorTextHint
 import com.kingslayer06.clockapp.core.ui.ColorTextSecondary
 import com.kingslayer06.clockapp.core.ui.ColorWarning
-import com.kingslayer06.clockapp.core.utils.formatTime
 
 @Composable
 fun PlayerPanel(
@@ -81,10 +78,7 @@ fun PlayerPanel(
                     haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                     onTap()
                 }
-            )
-            .semantics {
-                contentDescription = "$playerLabel clock: ${formatTime(timeMillis)}"
-            },
+            ),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -103,25 +97,24 @@ fun PlayerPanel(
             // Timer
             TimerDisplay(timeMillis = timeMillis, isActive = isActive)
 
+            // Move counter
+            Text(
+                text = "$moveCount moves".uppercase(),
+                color = ColorTextSecondary,
+                fontSize = 11.sp,
+                fontWeight = FontWeight.Medium,
+                letterSpacing = 1.5.sp
+            )
+
             // Tap hint
             if (isActive) {
                 Text(
-                    text = "tap to end turn",
+                    text = "Tap to end your turn",
                     color = ColorTextHint,
-                    fontSize = 10.sp,
-                    letterSpacing = 0.8.sp
+                    fontSize = 11.sp,
+                    letterSpacing = 1.5.sp
                 )
             }
         }
-
-        // Move counter
-        Text(
-            text = "$moveCount moves",
-            color = ColorTextSecondary,
-            fontSize = 10.sp,
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .padding(bottom = 52.dp)
-        )
     }
 }

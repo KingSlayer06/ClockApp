@@ -85,9 +85,7 @@ private struct ClockViewContent: View {
         playerOneMoves: 10,
         playerTwoMoves: 10,
         ruleset: .Blitz(),
-        winner: nil,
-        playerOneTimeState: .normal,
-        playerTwoTimeState: .normal
+        winner: nil
     )
     
     ClockViewContent(
