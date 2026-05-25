@@ -1,28 +1,68 @@
-This is a Kotlin Multiplatform project targeting Android, iOS.
+# Chess Clock App
 
-* [/iosApp](./iosApp/iosApp) contains an iOS application. Even if you’re sharing your UI with Compose Multiplatform,
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+A Kotlin Multiplatform Chess Clock application for Android and iOS. This project demonstrates sharing business logic, view models, and resources while maintaining native UI implementations on each platform.
 
-* [/sharedLogic](./sharedLogic/src) is for the code that will be shared between app targets in the project.
-  The most important subfolder is [commonMain](./sharedLogic/src/commonMain/kotlin). If preferred, you
-  can add code to the platform-specific folders here too.
+## Features
 
-* [/sharedUI](./sharedUI/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./sharedUI/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./sharedUI/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./sharedUI/src/jvmMain/kotlin)
-    folder is the appropriate location.
+- **Predefined Rulesets**: Blitz (5m), Quick (15m), and Action (30m).
+- **Custom Rulesets**: Configure custom time and increments.
+- **Game Controls**: Pause, resume, and reset functionality.
+- **Move Tracking**: Tracks the number of moves for each player.
+- **Winner Detection**: Automatically detects when a player's time runs out.
+- **Native UI**: Jetpack Compose on Android and SwiftUI on iOS for a platform-native feel.
+- **Orientation**: Supports both Landscape as well as Portrait Orientation.
 
-### Running the apps
+## Screenshots
 
-Use the run configurations provided by the run widget in your IDE's toolbar. You can also use these commands and options:
+### Android
+| Settings (Portrait) | Clock (Portrait) |
+| :---: | :---: |
+| <img src="./screenshots/android/Settings_Portrait.png" width="250"> | <img src="./screenshots/android/Clock_Portrait.png" width="250"> |
 
-- Android app: `./gradlew :androidApp:assembleDebug`
-- iOS app: open the [/iosApp](./iosApp) directory in Xcode and run it from there.
+| Settings (Landscape) | Clock (Landscape) |
+| :---: | :---: |
+| <img src="./screenshots/android/Settings_Landscape.png" width="500"> | <img src="./screenshots/android/Clock_Landscape.png" width="500"> |
 
----
+### iOS
+| Settings (Portrait) | Clock (Portrait) |
+| :---: | :---: |
+| <img src="./screenshots/iOS/Settings_Portrait.png" width="250"> | <img src="./screenshots/iOS/Clock_Portrait.png" width="250"> |
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+| Settings (Landscape) | Clock (Landscape) |
+| :---: | :---: |
+| <img src="./screenshots/iOS/Settings_Landscape.png" width="500"> | <img src="./screenshots/iOS/Clock_Landscape.png" width="500"> |
+
+## Project Structure
+
+- **[:sharedLogic](./sharedLogic)**: The core KMP module containing:
+  - **ViewModels**: Shared logic for managing clock state and settings.
+  - **Domain Models**: Definitions for `ChessRuleset`, `ClockUiState`, and `Player`.
+  - **DI**: Dependency injection using [Koin](https://insert-koin.io/).
+  - **SKIE**: Enhanced Swift interop using [SKIE](https://skie.touchlab.co/) for integrating KMP `ViewModels` in SwiftUI.
+
+- **[:androidApp](./androidApp)**: Native Android application:
+  - Built with **Jetpack Compose** and **Material 3**.
+  - Uses **Jetpack Compose Type-Safe Navigation** for screen transitions.
+  - Consumes shared ViewModels via Koin.
+
+- **[/iosApp](./iosApp)**: Native iOS application:
+  - Built with **SwiftUI**.
+  - Uses native `NavigationStack` for navigation.
+  - Consumes shared logic seamlessly via SKIE-generated Swift-friendly interfaces.
+
+## Tech Stack
+
+- **Kotlin Multiplatform (KMP)**
+- **SKIE** (Swift-friendly KMP ViewModels)
+- **Koin** (Dependency Injection)
+- **Kotlinx Coroutines** (Async timing logic)
+- **Kotlinx Serialization** (Ruleset persistence/navigation)
+- **Material 3** (Android UI)
+- **SwiftUI** (iOS UI)
+
+## Getting Started
+### Prerequisites
+
+- Android Studio / IntelliJ IDEA
+- Xcode (for iOS)
+  
