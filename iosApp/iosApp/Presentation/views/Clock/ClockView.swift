@@ -52,8 +52,6 @@ private struct ClockViewContent: View {
     let onReset: () -> Void
     let onBack: () -> Void
     
-    @Environment(\.horizontalSizeClass) private var hSize
-    
     var body: some View {
         GeometryReader { geometry in
             let isLandscape = geometry.size.width > geometry.size.height

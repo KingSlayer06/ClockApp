@@ -1,5 +1,6 @@
 package com.kingslayer06.clockapp.presentation.views.settings
 
+import android.content.res.Configuration
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -10,7 +11,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Surface
@@ -21,6 +24,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -67,11 +71,15 @@ private fun SettingsScreenContent(
         modifier = Modifier.fillMaxSize(),
         color = ColorBackground
     ) {
+        val configuration = LocalConfiguration.current
+        val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 24.dp, vertical = 50.dp),
-            verticalArrangement = Arrangement.spacedBy(20.dp)
+                .padding(horizontal = 24.dp)
+                .padding(vertical = if (isLandscape) 24.dp else 48.dp),
+            verticalArrangement = Arrangement.spacedBy(15.dp)
         ) {
             // Header
             SettingsHeader()

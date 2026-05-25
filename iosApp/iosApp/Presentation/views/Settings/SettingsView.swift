@@ -36,7 +36,7 @@ private struct SettingsViewContent: View {
     let onStartGame: () -> Void
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
+        VStack(alignment: .leading, spacing: 15) {
             // Header
             SettingsHeader()
             

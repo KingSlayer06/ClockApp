@@ -1,5 +1,8 @@
 package com.kingslayer06.clockapp.presentation.views.settings.components
 
+import android.R.attr.maxHeight
+import android.R.attr.maxWidth
+import android.content.res.Configuration
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -21,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -48,18 +52,57 @@ fun CustomRulesetGrid(
         label = "presetBorder"
     )
 
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .border(
-                width = 1.dp,
-                color = customBorderColor,
-                shape = RoundedCornerShape(12.dp)
-            )
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+    val configuration = LocalConfiguration.current
+    val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+
+    val modifier = Modifier
+        .fillMaxWidth()
+        .border(
+            width = 1.dp,
+            color = customBorderColor,
+            shape = RoundedCornerShape(12.dp)
+        )
+        .padding(16.dp)
+
+    if (isLandscape) {
+        LandscapeCustomRulesetGrid(
+            modifier = modifier,
+            state = state,
+            isCustomSelected = isCustomSelected,
+            onDecrementMinutes = onDecrementMinutes,
+            onIncrementMinutes = onIncrementMinutes,
+            onDecrementIncrement = onDecrementIncrement,
+            onIncrementIncrement = onIncrementIncrement
+        )
+    } else {
+        PortraitCustomRulesetGrid(
+            modifier = modifier,
+            state = state,
+            isCustomSelected = isCustomSelected,
+            onDecrementMinutes = onDecrementMinutes,
+            onIncrementMinutes = onIncrementMinutes,
+            onDecrementIncrement = onDecrementIncrement,
+            onIncrementIncrement = onIncrementIncrement
+        )
+    }
+}
+
+@Composable
+private fun LandscapeCustomRulesetGrid(
+    modifier: Modifier,
+    state: SettingsUiState,
+    isCustomSelected: Boolean,
+    onDecrementMinutes: () -> Unit,
+    onIncrementMinutes: () -> Unit,
+    onDecrementIncrement: () -> Unit,
+    onIncrementIncrement: () -> Unit
+) {
+    Row(
+        modifier = modifier,
+        horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         CustomTimeStepper(
+            modifier = Modifier.weight(1f),
             label = "Minutes per player",
             value = state.selectedRuleset.minutes,
             range = 1..60,
@@ -69,6 +112,7 @@ fun CustomRulesetGrid(
         )
 
         CustomTimeStepper(
+            modifier = Modifier.weight(1f),
             label = "Increment (seconds)",
             value = state.selectedRuleset.increment,
             range = 0..60,
@@ -80,7 +124,44 @@ fun CustomRulesetGrid(
 }
 
 @Composable
-fun CustomTimeStepper(
+private fun PortraitCustomRulesetGrid(
+    modifier: Modifier,
+    state: SettingsUiState,
+    isCustomSelected: Boolean,
+    onDecrementMinutes: () -> Unit,
+    onIncrementMinutes: () -> Unit,
+    onDecrementIncrement: () -> Unit,
+    onIncrementIncrement: () -> Unit
+) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        CustomTimeStepper(
+            modifier = Modifier.fillMaxWidth(),
+            label = "Minutes per player",
+            value = state.selectedRuleset.minutes,
+            range = 1..60,
+            isSelected = isCustomSelected,
+            onDecrement = onDecrementMinutes,
+            onIncrement = onIncrementMinutes
+        )
+
+        CustomTimeStepper(
+            modifier = Modifier.fillMaxWidth(),
+            label = "Increment (seconds)",
+            value = state.selectedRuleset.increment,
+            range = 0..60,
+            isSelected = isCustomSelected,
+            onDecrement = onDecrementIncrement,
+            onIncrement = onIncrementIncrement
+        )
+    }
+}
+
+@Composable
+private fun CustomTimeStepper(
+    modifier: Modifier,
     label: String,
     value: Int,
     range: IntRange,
@@ -101,7 +182,7 @@ fun CustomTimeStepper(
     Surface(
         color = bgColor,
         shape = RoundedCornerShape(10.dp),
-        modifier = Modifier.fillMaxWidth()
+        modifier = modifier
     ) {
         Row(
             modifier = Modifier.padding(horizontal = 14.dp, vertical = 10.dp),
