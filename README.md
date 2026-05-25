@@ -40,15 +40,17 @@ A Kotlin Multiplatform Chess Clock application for Android and iOS. This project
   - **DI**: Dependency injection using [Koin](https://insert-koin.io/).
   - **SKIE**: Enhanced Swift interop using [SKIE](https://skie.touchlab.co/) for integrating KMP `ViewModels` in SwiftUI.
 
-- **[:androidApp](./androidApp)**: Native Android application:
-  - Built with **Jetpack Compose** and **Material 3**.
-  - Uses **Jetpack Compose Type-Safe Navigation** for screen transitions.
+- **[:androidApp](./androidApp)**: Native Android application containing:
+  - **Views**: Built with **Jetpack Compose** and **Material 3**.
+  - **Core/Navigation**: Uses **Jetpack Compose Type-Safe Navigation** for screen transitions.
   - Consumes shared ViewModels via Koin.
+  **App Entry Point**: `MainActivity.kt` contains logic for App Launch.
 
-- **[/iosApp](./iosApp)**: Native iOS application:
-  - Built with **SwiftUI**.
-  - Uses native `NavigationStack` for navigation.
-  - Consumes shared logic seamlessly via SKIE-generated Swift-friendly interfaces.
+- **[/iosApp](./iosApp)**: Native iOS application containing:
+  - **Views**: Built with **SwiftUI**.
+  - **ViewModel Wrapper**: Consumes KMP shared logic via SKIE-generated interfaces.
+  - **Core/Navigation**: Uses native `NavigationStack` for navigation.
+  - **App Entry Point**: `iOSApp.swift` contains logic for App Launch.
 
 ## Tech Stack
 
