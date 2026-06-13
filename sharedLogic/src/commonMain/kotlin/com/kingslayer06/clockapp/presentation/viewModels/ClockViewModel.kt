@@ -122,7 +122,7 @@ class ClockViewModel: ViewModel() {
                             }
                         }
                         Player.TWO -> {
-                            p2Time = (p2Time - 100).coerceAtLeast(0)
+                            p2Time = (p2Time - tickInterval).coerceAtLeast(0)
 
                             // Player one won
                             if (p2Time <= 0) {
