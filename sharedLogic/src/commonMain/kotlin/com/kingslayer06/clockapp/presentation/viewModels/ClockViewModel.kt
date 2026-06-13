@@ -15,15 +15,11 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
-class ClockViewModel(): ViewModel() {
+class ClockViewModel: ViewModel() {
     private val _uiState = MutableStateFlow(ClockUiState())
     val uiState = _uiState.asStateFlow()
 
     private var tickerJob: Job? = null
-
-    init {
-        selectRuleset(ChessRuleset.Blitz)
-    }
 
     fun selectRuleset(ruleset: ChessRuleset) {
         stopTicker()
@@ -105,8 +101,6 @@ class ClockViewModel(): ViewModel() {
 
             while (isActive) {
                 delay(tickInterval)
-
-                var gameFinished = false
 
                 _uiState.update { current ->
                     // If game is not running, return
