@@ -6,7 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		A3DCA1742FDE2010006DF75D /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A3DCA1732FDE2010006DF75D /* libsqlite3.tbd */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		A3DCA1732FDE2010006DF75D /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		ED27A18B5288B1088182342E /* ClockApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClockApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -41,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3DCA1742FDE2010006DF75D /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,6 +58,7 @@
 			children = (
 				DCD3F53AD2C111DE83BD89D1 /* Configuration */,
 				E3D2F11C28F21AD6C6713062 /* iosApp */,
+				A3DCA1722FDE2010006DF75D /* Frameworks */,
 				65AABD350FA36B00B3A6D6D0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -62,6 +69,14 @@
 				ED27A18B5288B1088182342E /* ClockApp.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		A3DCA1722FDE2010006DF75D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A3DCA1732FDE2010006DF75D /* libsqlite3.tbd */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

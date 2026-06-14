@@ -1,0 +1,25 @@
+CREATE TABLE GameHistory (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    rulesetName TEXT NOT NULL,
+    minutes INTEGER NOT NULL,
+    increment INTEGER NOT NULL,
+    playerOneMoves INTEGER NOT NULL,
+    playerTwoMoves INTEGER NOT NULL,
+    playerOneTimeMs INTEGER NOT NULL,
+    playerTwoTimeMs INTEGER NOT NULL,
+    winner TEXT,
+    date INTEGER NOT NULL
+);
+
+insert:
+INSERT INTO GameHistory (rulesetName, minutes, increment, playerOneMoves, playerTwoMoves, playerOneTimeMs, playerTwoTimeMs, winner, date)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+selectAll:
+SELECT * FROM GameHistory ORDER BY date DESC;
+
+selectById:
+SELECT * FROM GameHistory WHERE id = ?;
+
+deleteById:
+DELETE FROM GameHistory WHERE id = ?;

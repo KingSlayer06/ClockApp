@@ -5,7 +5,9 @@ import androidx.lifecycle.viewModelScope
 import com.kingslayer06.clockapp.domain.models.Player
 import com.kingslayer06.clockapp.domain.models.ChessRuleset
 import com.kingslayer06.clockapp.domain.models.ClockUiState
+import com.kingslayer06.clockapp.domain.models.GameHistory
 import com.kingslayer06.clockapp.domain.models.GamePhase
+import com.kingslayer06.clockapp.domain.useCase.InsertUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -14,12 +16,38 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import kotlin.time.Clock
 
-class ClockViewModel: ViewModel() {
+class ClockViewModel(
+    private val insertUseCase: InsertUseCase
+): ViewModel() {
     private val _uiState = MutableStateFlow(ClockUiState())
     val uiState = _uiState.asStateFlow()
 
     private var tickerJob: Job? = null
+
+    fun saveGame(state: ClockUiState) {
+        viewModelScope.launch {
+            val gameHistory = GameHistory(
+                rulesetName = state.ruleset.name,
+                minutes = state.ruleset.minutes,
+                increment = state.ruleset.increment,
+                playerOneMoves = state.playerOneMoves,
+                playerTwoMoves = state.playerTwoMoves,
+                playerOneTimeMs = state.playerOneTimeMs,
+                playerTwoTimeMs = state.playerTwoTimeMs,
+                winner = state.winner?.name ?: "",
+                date = Clock.System.now().toEpochMilliseconds()
+            )
+
+            try {
+                insertUseCase.execute(gameHistory)
+                println("Game history saved !")
+            } catch (e: Exception) {
+                println("Failed to save game history: ${e.message}")
+            }
+        }
+    }
 
     fun selectRuleset(ruleset: ChessRuleset) {
         stopTicker()

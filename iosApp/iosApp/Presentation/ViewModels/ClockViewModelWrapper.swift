@@ -32,6 +32,10 @@ final class ClockViewModelWrapper: ObservableObject {
     deinit {
         task?.cancel()
     }
+    
+    func saveGame(state: ClockUiState) {
+        viewModel.saveGame(state: state)
+    }
 
     func selectRuleset(ruleset: ChessRuleset) {
         viewModel.selectRuleset(ruleset: ruleset)
