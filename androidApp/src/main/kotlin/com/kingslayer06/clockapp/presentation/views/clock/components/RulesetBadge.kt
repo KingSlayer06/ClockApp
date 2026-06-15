@@ -35,8 +35,7 @@ fun RulesetBadge(ruleset: ChessRuleset, modifier: Modifier = Modifier) {
     Surface(
         modifier = modifier.padding(top = 8.dp),
         shape = RoundedCornerShape(20.dp),
-        color = Color(0xFF1E1E3A),
-        tonalElevation = 0.dp
+        color = Color(0xFF1E1E3A)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
