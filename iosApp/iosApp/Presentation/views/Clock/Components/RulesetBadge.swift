@@ -12,11 +12,11 @@ struct RulesetBadge: View {
     let ruleset: ChessRuleset
     
     private var content: (icon: String, label: String) {
-        switch ruleset {
-            case .Action(): return ("bolt.fill", "Action")
-            case .Quick(): return ("timer", "Quick")
-            case .Blitz(): return ("bolt.fill", "Blitz")
-            default: return ("clock.fill", "Custom")
+        switch onEnum(of: ruleset) {
+            case .action: return ("bolt.fill", "Action")
+            case .quick: return ("timer", "Quick")
+            case .blitz: return ("bolt.fill", "Blitz")
+            case .custom: return ("clock.fill", "Custom")
         }
     }
     

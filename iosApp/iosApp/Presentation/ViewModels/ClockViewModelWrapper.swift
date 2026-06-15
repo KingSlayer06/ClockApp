@@ -23,6 +23,7 @@ final class ClockViewModelWrapper: ObservableObject {
 
         // Collect StateFlow from Kotlin
         self.task = Task {
+            // Convert Kotlin Stateflow to AsyncSequence
             for await uiState in viewModel.uiState {
                 self.uiState = uiState
             }
