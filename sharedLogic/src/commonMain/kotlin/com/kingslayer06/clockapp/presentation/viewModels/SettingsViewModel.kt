@@ -16,10 +16,6 @@ class SettingsViewModel: ViewModel() {
     private val MIN_INCREMENT = 0
     private val MAX_INCREMENT = 60
 
-    init {
-        selectRuleset(ChessRuleset.Blitz)
-    }
-
     fun selectRuleset(ruleset: ChessRuleset) {
         _uiState.update { it.copy(
             selectedRuleset = ruleset
@@ -27,26 +23,38 @@ class SettingsViewModel: ViewModel() {
     }
 
     fun incrementMinutes() {
-        val minutes = _uiState.value.selectedRuleset.minutes + 1
-        val increment = _uiState.value.selectedRuleset.increment
+        val current = _uiState.value.selectedRuleset
+            ?: ChessRuleset.Custom(MIN_MINUTES, MIN_INCREMENT)
+
+        val minutes = current.minutes + 1
+        val increment = current.increment
         updateCustomValues(minutes, increment)
     }
 
     fun decrementMinutes() {
-        val minutes = _uiState.value.selectedRuleset.minutes - 1
-        val increment = _uiState.value.selectedRuleset.increment
+        val current = _uiState.value.selectedRuleset
+            ?: ChessRuleset.Custom(MIN_MINUTES, MIN_INCREMENT)
+
+        val minutes = current.minutes - 1
+        val increment = current.increment
         updateCustomValues(minutes, increment)
     }
 
     fun incrementIncrement() {
-        val minutes = _uiState.value.selectedRuleset.minutes
-        val increment = _uiState.value.selectedRuleset.increment + 1
+        val current = _uiState.value.selectedRuleset
+            ?: ChessRuleset.Custom(MIN_MINUTES, MIN_INCREMENT)
+
+        val minutes = current.minutes
+        val increment = current.increment + 1
         updateCustomValues(minutes,increment)
     }
 
     fun decrementIncrement() {
-        val minutes = _uiState.value.selectedRuleset.minutes
-        val increment = _uiState.value.selectedRuleset.increment - 1
+        val current = _uiState.value.selectedRuleset
+            ?: ChessRuleset.Custom(MIN_MINUTES, MIN_INCREMENT)
+
+        val minutes = current.minutes
+        val increment = current.increment - 1
         updateCustomValues(minutes, increment)
     }
 

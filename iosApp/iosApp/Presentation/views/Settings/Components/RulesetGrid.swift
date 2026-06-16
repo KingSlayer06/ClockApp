@@ -9,7 +9,7 @@ import SwiftUI
 import SharedLogic
 
 struct RulesetGrid: View {
-    let selected: ChessRuleset
+    let selected: ChessRuleset?
     let onSelect: (ChessRuleset) -> Void
     
     private let items: [(ChessRuleset, String, String)] = {

@@ -1,7 +1,5 @@
 package com.kingslayer06.clockapp.presentation.views.settings.components
 
-import android.R.attr.maxHeight
-import android.R.attr.maxWidth
 import android.content.res.Configuration
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.border
@@ -47,6 +45,8 @@ fun CustomRulesetGrid(
 ) {
     val isCustomSelected = state.selectedRuleset is ChessRuleset.Custom
 
+    val ruleset = state.selectedRuleset ?: ChessRuleset.Custom()
+
     val customBorderColor by animateColorAsState(
         targetValue = if (isCustomSelected) ColorAccentGreen else ColorBorder,
         label = "presetBorder"
@@ -67,7 +67,7 @@ fun CustomRulesetGrid(
     if (isLandscape) {
         LandscapeCustomRulesetGrid(
             modifier = modifier,
-            state = state,
+            ruleset = ruleset,
             isCustomSelected = isCustomSelected,
             onDecrementMinutes = onDecrementMinutes,
             onIncrementMinutes = onIncrementMinutes,
@@ -77,7 +77,7 @@ fun CustomRulesetGrid(
     } else {
         PortraitCustomRulesetGrid(
             modifier = modifier,
-            state = state,
+            ruleset = ruleset,
             isCustomSelected = isCustomSelected,
             onDecrementMinutes = onDecrementMinutes,
             onIncrementMinutes = onIncrementMinutes,
@@ -90,7 +90,7 @@ fun CustomRulesetGrid(
 @Composable
 private fun LandscapeCustomRulesetGrid(
     modifier: Modifier,
-    state: SettingsUiState,
+    ruleset: ChessRuleset,
     isCustomSelected: Boolean,
     onDecrementMinutes: () -> Unit,
     onIncrementMinutes: () -> Unit,
@@ -104,7 +104,7 @@ private fun LandscapeCustomRulesetGrid(
         CustomTimeStepper(
             modifier = Modifier.weight(1f),
             label = "Minutes per player",
-            value = state.selectedRuleset.minutes,
+            value = ruleset.minutes,
             range = 1..60,
             isSelected = isCustomSelected,
             onDecrement = onDecrementMinutes,
@@ -114,7 +114,7 @@ private fun LandscapeCustomRulesetGrid(
         CustomTimeStepper(
             modifier = Modifier.weight(1f),
             label = "Increment (seconds)",
-            value = state.selectedRuleset.increment,
+            value = ruleset.increment,
             range = 0..60,
             isSelected = isCustomSelected,
             onDecrement = onDecrementIncrement,
@@ -126,7 +126,7 @@ private fun LandscapeCustomRulesetGrid(
 @Composable
 private fun PortraitCustomRulesetGrid(
     modifier: Modifier,
-    state: SettingsUiState,
+    ruleset: ChessRuleset,
     isCustomSelected: Boolean,
     onDecrementMinutes: () -> Unit,
     onIncrementMinutes: () -> Unit,
@@ -140,7 +140,7 @@ private fun PortraitCustomRulesetGrid(
         CustomTimeStepper(
             modifier = Modifier.fillMaxWidth(),
             label = "Minutes per player",
-            value = state.selectedRuleset.minutes,
+            value = ruleset.minutes,
             range = 1..60,
             isSelected = isCustomSelected,
             onDecrement = onDecrementMinutes,
@@ -150,7 +150,7 @@ private fun PortraitCustomRulesetGrid(
         CustomTimeStepper(
             modifier = Modifier.fillMaxWidth(),
             label = "Increment (seconds)",
-            value = state.selectedRuleset.increment,
+            value = ruleset.increment,
             range = 0..60,
             isSelected = isCustomSelected,
             onDecrement = onDecrementIncrement,

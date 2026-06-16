@@ -25,6 +25,10 @@ struct CustomRulesetGrid: View {
         state.selectedRuleset is ChessRuleset.Custom
     }
     
+    var ruleset: ChessRuleset {
+        return state.selectedRuleset ?? ChessRuleset.Custom.init(customMinutes: 1, customIncrement: 0)
+    }
+    
     var customBorderColor: Color {
         withAnimation {
             isCustomSelected ? Color.accentGreen : Color.border
@@ -35,7 +39,7 @@ struct CustomRulesetGrid: View {
         Group {
             if isLandscape {
                 LandscapeCustomRulesetGrid(
-                    state: state,
+                    ruleset: ruleset,
                     isCustomSelected: isCustomSelected,
                     onDecrementMinutes: onDecrementMinutes,
                     onIncrementMinutes: onIncrementMinutes,
@@ -44,7 +48,7 @@ struct CustomRulesetGrid: View {
                 )
             } else {
                 PortraitCustomRulesetGrid(
-                    state: state,
+                    ruleset: ruleset,
                     isCustomSelected: isCustomSelected,
                     onDecrementMinutes: onDecrementMinutes,
                     onIncrementMinutes: onIncrementMinutes,
@@ -64,7 +68,7 @@ struct CustomRulesetGrid: View {
 }
 
 private struct LandscapeCustomRulesetGrid: View {
-    let state: SettingsUiState
+    let ruleset: ChessRuleset
     let isCustomSelected: Bool
     let onDecrementMinutes: () -> Void
     let onIncrementMinutes: () -> Void
@@ -75,7 +79,7 @@ private struct LandscapeCustomRulesetGrid: View {
         HStack(spacing: 20) {
             CustomTimeStepper(
                 label: "Minutes per player",
-                value: state.selectedRuleset.minutes,
+                value: ruleset.minutes,
                 range: 1...60,
                 isSelected: isCustomSelected,
                 onDecrement: onDecrementMinutes,
@@ -83,7 +87,7 @@ private struct LandscapeCustomRulesetGrid: View {
             )
             CustomTimeStepper(
                 label: "Increment (seconds)",
-                value: state.selectedRuleset.increment,
+                value: ruleset.increment,
                 range: 0...60,
                 isSelected: isCustomSelected,
                 onDecrement: onDecrementIncrement,
@@ -94,7 +98,7 @@ private struct LandscapeCustomRulesetGrid: View {
 }
 
 private struct PortraitCustomRulesetGrid: View {
-    let state: SettingsUiState
+    let ruleset: ChessRuleset
     let isCustomSelected: Bool
     let onDecrementMinutes: () -> Void
     let onIncrementMinutes: () -> Void
@@ -105,7 +109,7 @@ private struct PortraitCustomRulesetGrid: View {
         VStack(spacing: 20) {
             CustomTimeStepper(
                 label: "Minutes per player",
-                value: state.selectedRuleset.minutes,
+                value: ruleset.minutes,
                 range: 1...60,
                 isSelected: isCustomSelected,
                 onDecrement: onDecrementMinutes,
@@ -113,7 +117,7 @@ private struct PortraitCustomRulesetGrid: View {
             )
             CustomTimeStepper(
                 label: "Increment (seconds)",
-                value: state.selectedRuleset.increment,
+                value: ruleset.increment,
                 range: 0...60,
                 isSelected: isCustomSelected,
                 onDecrement: onDecrementIncrement,

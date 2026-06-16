@@ -31,6 +31,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kingslayer06.clockapp.core.ui.ColorAccentGreen
 import com.kingslayer06.clockapp.core.ui.ColorBackground
+import com.kingslayer06.clockapp.core.ui.ColorBorder
+import com.kingslayer06.clockapp.core.ui.ColorSurface
 import com.kingslayer06.clockapp.core.ui.ColorTextPrimary
 import com.kingslayer06.clockapp.domain.models.ChessRuleset
 import com.kingslayer06.clockapp.domain.models.SettingsUiState
@@ -53,7 +55,7 @@ fun SettingsScreen(
         onIncrementMinutes = { viewModel.incrementMinutes() },
         onDecrementIncrement = { viewModel.decrementIncrement() },
         onIncrementIncrement = { viewModel.incrementIncrement() },
-        onStartGame = { onStart(state.selectedRuleset) }
+        onStartGame = { state.selectedRuleset?.let { onStart(it) } }
     )
 }
 
@@ -110,11 +112,13 @@ private fun SettingsScreenContent(
                     .fillMaxWidth()
                     .height(48.dp),
                 shape = RoundedCornerShape(10.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = ColorAccentGreen)
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = if (state.selectedRuleset != null) ColorAccentGreen else ColorSurface
+                )
             ) {
                 Text(
                     text = "Start game",
-                    color = Color(0xFF0A1F0A),
+                    color = if (state.selectedRuleset != null) Color(0xFF0A1F0A) else ColorTextPrimary,
                     fontSize = 14.sp,
                     fontWeight = FontWeight.SemiBold
                 )
@@ -150,7 +154,7 @@ private fun SectionLabel(text: String) {
 @Composable
 fun SettingsScreenPreview() {
     val dummyState = SettingsUiState(
-        selectedRuleset = ChessRuleset.Blitz
+        selectedRuleset = null
     )
 
     SettingsScreenContent(

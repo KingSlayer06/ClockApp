@@ -21,7 +21,11 @@ struct SettingsView: View {
             onIncrementMinutes: { viewModel.incrementMinutes() },
             onDecrementIncrement: { viewModel.decrementIncrement() },
             onIncrementIncrement: { viewModel.incrementIncrement() },
-            onStartGame: { onStart(viewModel.uiState.selectedRuleset) }
+            onStartGame: {
+                if let ruleset = viewModel.uiState.selectedRuleset {
+                    onStart(ruleset)
+                }
+            }
         )
     }
 }
@@ -65,10 +69,14 @@ private struct SettingsViewContent: View {
             } label: {
                 Text("Start game")
                     .font(.system(size: 14, weight: .semibold))
-                    .foregroundColor(Color(hex: "0A1F0A"))
+                    .foregroundColor(
+                        state.selectedRuleset != nil ? Color(hex: "0A1F0A") : Color.textPrimary
+                    )
                     .frame(maxWidth: .infinity)
                     .frame(height: 48)
-                    .background(Color.accentGreen)
+                    .background(
+                        state.selectedRuleset != nil ? Color.accentGreen : Color.surface
+                    )
                     .clipShape(RoundedRectangle(cornerRadius: 10))
             }
         }

@@ -29,7 +29,7 @@ import com.kingslayer06.clockapp.domain.models.ChessRuleset
 
 @Composable
 fun RulesetGrid(
-    selected: ChessRuleset,
+    selected: ChessRuleset?,
     onSelect: (ChessRuleset) -> Unit
 ) {
     Row(

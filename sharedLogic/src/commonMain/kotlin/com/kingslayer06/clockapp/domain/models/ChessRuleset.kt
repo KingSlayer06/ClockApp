@@ -28,7 +28,7 @@ sealed class ChessRuleset(
 
     @Serializable
     data class Custom(
-        val customMinutes: Int,
+        val customMinutes: Int = 1,
         val customIncrement: Int = 0
     ) : ChessRuleset(
         name ="Custom",
